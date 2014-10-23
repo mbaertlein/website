@@ -66,7 +66,7 @@ class control:
 		GPIO.output(5, control.light_val)
 		return redirect(url_for('control_main'))
 
-	@app.route('/about')
+	@app.route('/contact')
 	def about():
 		return render_template('about.html')
 	def start(self):
@@ -77,6 +77,5 @@ class control:
 if __name__ == "__main__":
 	application = control()
 	application.init()
-	print "exitted init..."
 	application.device_monitor()
 
