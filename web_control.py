@@ -1,3 +1,10 @@
+################################################
+# Python script that sets up a website for 
+# control over the light in Mitch Baertlein's
+# room.  Also, monitors a light switch in his
+# room.
+################################################
+
 from flask import Flask, request, render_template, g, url_for, redirect
 import RPi.GPIO as GPIO
 import threading
