@@ -1,11 +1,16 @@
 <html>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style2.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style2.css') }}">
 
-    {% block body %}
+{% block body %}
         <h1>
 	         <FONT COLOR="#2E2E2D">Mitchell</FONT><!--
          --><FONT COLOR="#000000">B</FONT>
         </h1>
+		  <div id = "nav">
+		  <p>Home</p>
+		  <p>Blog</p>
+		  <p>Projects</p>
+		  </div>
 		  
     {% endblock %}
 

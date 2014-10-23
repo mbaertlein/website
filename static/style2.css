@@ -24,3 +24,11 @@ h1 {
 	padding:3px;
 	border:2px inset #303030;
 }
+
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px; 
