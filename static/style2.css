@@ -1,19 +1,30 @@
 body { 
-	background-image:url("back1.jpg");
-	background-repeat:no-repeat;
-	background-attachment: fixed;
-	background-size: 100% 100%;
+	background-color:#E0E0E0;
 }
 h1 {
-	font-family:Verdana;
-   font-size:300%;
+	font-family:Trebuchet MS;
+	background-color:#FFFFFF;
+        font-size:300%;
+	font-style:italic;
 	text-align:center;
 	padding:10px;
 }
-	
-.para {
-	margin-bottom: 1cm;
+
+a:link {
+	text-decoration:none;
 }
+
+a:visited {
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+}
+a:active {
+	text-decoration:underline;
+}
+
 #button1 {
 	height: 4em;
 	width: 20em;
@@ -25,9 +36,9 @@ h1 {
 }
 
 #nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
+    background-color:#FFFFFF;
+    border-radius:5px;
+    height:100px;
     width:100px;
     float:left;
     padding:5px; 
