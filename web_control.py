@@ -66,11 +66,12 @@ class control:
 		GPIO.output(5, control.light_val)
 		return redirect(url_for('control_main'))
 
-	@app.route('/contact')
+	@app.route('/contact',methods=['POST'])
 	def contact():
 		return render_template('contact.html')
 		
 	@app.route('/about')
+	def about():
 		return render_template('about.html')
 		
 	@app.route('/projects')
