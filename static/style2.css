@@ -8,9 +8,8 @@ h1 {
 	font-family:Verdana;
    font-size:300%;
 	text-align:center;
-	padding:5px;
-	background-color:#A0A0A0;
-
+	text-decoration:underline;
+	padding:8px;
 }
 	
 .para {
