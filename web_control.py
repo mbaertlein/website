@@ -66,7 +66,7 @@ class control:
 		GPIO.output(5, control.light_val)
 		return redirect(url_for('control_main'))
 
-	@app.route('/contact',methods=['POST'])
+	@app.route('/contact',methods=['POST', 'GET'])
 	def contact():
 		return render_template('contact.html')
 		
