@@ -67,8 +67,16 @@ class control:
 		return redirect(url_for('control_main'))
 
 	@app.route('/contact')
-	def about():
+	def contact():
+		return render_template('contact.html')
+		
+	@app.route('/about')
 		return render_template('about.html')
+		
+	@app.route('/projects')
+	def projects():
+		return render_template('projects.html')
+		
 	def start(self):
 	# Beginning the web application
 
