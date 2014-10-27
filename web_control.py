@@ -19,7 +19,7 @@ class control:
 	# Monitors the light switch
 	
 		previous_value = GPIO.input(6)
-		print "you made it!"
+
 		while(True):
 
 			current_value = GPIO.input(6)
@@ -70,16 +70,44 @@ class control:
 	def contact():
 		return render_template('contact.html')
 		
+		
 	@app.route('/about')
 	def about():
 		return render_template('about.html')
+		
 		
 	@app.route('/projects')
 	def projects():
 		return render_template('projects.html')
 		
+		
+	@app.route('/login', methods = ['GET', 'POST'])
+	def login():
+		error = None
+		if request.method == 'POST':
+			if request.form['username'] != app.config['USERNAME']:
+				error = 'Invalid Username'
+			elif request.form['password'] != app.config['PASSWORD']:
+				error = 'Invalid Password'
+			else:
+				session['logged_in'] = True
+				flash('You were logged in')
+				return redirect(url_for('home'))
+		return render_template('login.html', error = error)
+		
+		
+	@app.route('/logout')
+	def logout():
+		session.pop('logged_in', None)
+		flash('You were logged out')
+		return redirect(url_for('show_entries'))
+		
+		
 	def start(self):
 	# Beginning the web application
+		USERNAME = 'mitchell'
+		PASSWORD = 'pimAn123!'
+		self.app.config.from_object(__name__)
 
 		self.app.run('0.0.0.0', 80)
 
