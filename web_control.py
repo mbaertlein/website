@@ -61,7 +61,8 @@ class control:
 	@app.route('/add',methods=['POST'])
 	def add_entry():
 	# Change the light value
-
+		if not session.get('logged_in'):
+			abort(401)	
 		control.light_val = not control.light_val
 		GPIO.output(5, control.light_val)
 		return redirect(url_for('control_main'))
@@ -85,9 +86,9 @@ class control:
 	def login():
 		error = None
 		if request.method == 'POST':
-			if request.form['username'] != app.config['USERNAME']:
+			if request.form['username'] != control.app.config['USERNAME']:
 				error = 'Invalid Username'
-			elif request.form['password'] != app.config['PASSWORD']:
+			elif request.form['password'] != control.app.config['PASSWORD']:
 				error = 'Invalid Password'
 			else:
 				session['logged_in'] = True
@@ -100,7 +101,7 @@ class control:
 	def logout():
 		session.pop('logged_in', None)
 		flash('You were logged out')
-		return redirect(url_for('show_entries'))
+		return redirect(url_for('home'))
 		
 		
 	def start(self):
