@@ -12,6 +12,7 @@ import threading
 USERNAME = 'mitchell'
 PASSWORD = 'pimAn123!'
 SECRET_KEY = 'password_05181995'
+
 class control:
 
 	from flask import session
@@ -20,7 +21,6 @@ class control:
 	light_val = False
 	app = Flask(__name__)
 	app.config.from_object(__name__)
-	logged_in = False
 	
 	def device_monitor(self):
 	# Monitors the light switch
@@ -38,6 +38,7 @@ class control:
 			
 			previous_value = current_value
 
+			
 	def init(self):
 	# Initializes the GPIO pins.
 
@@ -69,7 +70,7 @@ class control:
 	def add_entry():
 	# Change the light value
 		if not session['logged_in']:
-			abort(401)	
+			redirect(url_for('login'))
 		control.light_val = not control.light_val
 		GPIO.output(5, control.light_val)
 		return redirect(url_for('control_main'))
@@ -78,11 +79,9 @@ class control:
 	def contact():
 		return render_template('contact.html')
 		
-		
 	@app.route('/about')
 	def about():
 		return render_template('about.html')
-		
 		
 	@app.route('/projects')
 	def projects():
@@ -102,7 +101,7 @@ class control:
 				print session
 				session['logged_in'] = True
 				print 'You have been officially logged in...'
-				return redirect(url_for('home'))
+				return redirect(url_for('control_main'))
 		return render_template('login.html', error = error)
 		
 		
