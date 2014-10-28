@@ -5,15 +5,22 @@
 # room.
 ################################################
 
-from flask import Flask, request, render_template, g, url_for, redirect
+from flask import Flask, request, render_template, g, url_for, redirect, session
 import RPi.GPIO as GPIO
 import threading
 
+USERNAME = 'mitchell'
+PASSWORD = 'pimAn123!'
+SECRET_KEY = 'password_05181995'
 class control:
-	
+
+	from flask import session
+
 	# Variables
 	light_val = False
 	app = Flask(__name__)
+	app.config.from_object(__name__)
+	logged_in = False
 	
 	def device_monitor(self):
 	# Monitors the light switch
@@ -61,7 +68,7 @@ class control:
 	@app.route('/add',methods=['POST'])
 	def add_entry():
 	# Change the light value
-		if not session.get('logged_in'):
+		if not session['logged_in']:
 			abort(401)	
 		control.light_val = not control.light_val
 		GPIO.output(5, control.light_val)
@@ -86,13 +93,15 @@ class control:
 	def login():
 		error = None
 		if request.method == 'POST':
+			
 			if request.form['username'] != control.app.config['USERNAME']:
 				error = 'Invalid Username'
 			elif request.form['password'] != control.app.config['PASSWORD']:
 				error = 'Invalid Password'
 			else:
+				print session
 				session['logged_in'] = True
-				flash('You were logged in')
+				print 'You have been officially logged in...'
 				return redirect(url_for('home'))
 		return render_template('login.html', error = error)
 		
@@ -105,12 +114,9 @@ class control:
 		
 		
 	def start(self):
-	# Beginning the web application
-		USERNAME = 'mitchell'
-		PASSWORD = 'pimAn123!'
-		self.app.config.from_object(__name__)
-
-		self.app.run('0.0.0.0', 80)
+	# Beginning the web application	
+		print control.app.config['PASSWORD']
+		control.app.run('0.0.0.0', 80)
 
 if __name__ == "__main__":
 	application = control()
