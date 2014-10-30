@@ -66,23 +66,30 @@ class control:
 				       light=control.light_val)
 	
 	
-	@app.route('/add',methods=['POST'])
+	@app.route('/add',methods=['POST','GET'])
 	def add_entry():
 	# Change the light value
-		if not session['logged_in']:
-			redirect(url_for('login'))
+		try:
+			if not session['logged_in']:
+				return redirect(url_for('login'))
+		except:
+			return redirect(url_for('login'))
+
 		control.light_val = not control.light_val
 		GPIO.output(5, control.light_val)
 		return redirect(url_for('control_main'))
 
+
 	@app.route('/contact',methods=['POST', 'GET'])
 	def contact():
 		return render_template('contact.html')
-		
+
+
 	@app.route('/about')
 	def about():
 		return render_template('about.html')
-		
+
+
 	@app.route('/projects')
 	def projects():
 		return render_template('projects.html')
@@ -90,31 +97,29 @@ class control:
 		
 	@app.route('/login', methods = ['GET', 'POST'])
 	def login():
+		
 		error = None
 		if request.method == 'POST':
-			
 			if request.form['username'] != control.app.config['USERNAME']:
 				error = 'Invalid Username'
 			elif request.form['password'] != control.app.config['PASSWORD']:
 				error = 'Invalid Password'
 			else:
-				print session
 				session['logged_in'] = True
-				print 'You have been officially logged in...'
 				return redirect(url_for('control_main'))
+		
 		return render_template('login.html', error = error)
 		
 		
 	@app.route('/logout')
 	def logout():
 		session.pop('logged_in', None)
-		flash('You were logged out')
-		return redirect(url_for('home'))
+		return redirect(url_for('control_main'))
 		
 		
 	def start(self):
 	# Beginning the web application	
-		print control.app.config['PASSWORD']
+		
 		control.app.run('0.0.0.0', 80)
 
 if __name__ == "__main__":
