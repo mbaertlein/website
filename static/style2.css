@@ -1,34 +1,47 @@
 body { 
-	color:#BBC8C7;
+	background-color:#A4A4A4;
 }
 h1 {
 	font-family:Trebuchet MS;
-	background-color:#FFFFFF;
-   font-size:300%;
+	background-color:#3A4140;
+	font-size:300%;
 	font-style:italic;
-	text-align:center;
-	padding:10px;
+	top:0px;
+	left:50px;
+	padding:15px;
+	padding-left:100px;
+	padding-right:100px;
+	border-radius:10px;
 }
 
 a:link {
+	color:#000000;
 	text-decoration:none;
 }
 
 a:visited {
 	text-decoration:none;
+	color:#000000;
 }
 
 a:hover {
-	text-decoration:underline;
+	text-decoration:none;
 }
 a:active {
-	text-decoration:underline;
+	text-decoration:none;
 }
 
 #nav {
-    background-color:#FFFFFF;
-    border-radius:5px;
-    height:100px;
-    width:100px;
-    float:left;
-    padding:5px; 
+    background-color:#E6E6E6;
+    border-radius:10px;
+    position:fixed;
+    top:170px;
+    left:10px;
+    text-align:center;
+    font-family:Trebuchet MS;
+    font-style:italic;
+    padding-bottom:300px;
+    padding-right:20px;
+    padding-left:20px;
+    padding-top:10px; 
+}

@@ -92,7 +92,7 @@ class control:
 
 	@app.route('/projects')
 	def projects():
-		return render_template('projects.html')
+		return render_template('project.html')
 		
 		
 	@app.route('/login', methods = ['GET', 'POST'])
