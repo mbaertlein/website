@@ -8,10 +8,11 @@
 from flask import Flask, request, render_template, g, url_for, redirect, session
 import RPi.GPIO as GPIO
 import threading
+import config
 
-USERNAME = 'mitchell'
-PASSWORD = 'pimAn123!'
-SECRET_KEY = 'password_05181995'
+USERNAME = config.USERNAME
+PASSWORD = config.PASSWORD
+SECRET_KEY = config.SECRET_KEY
 
 class control:
 
@@ -19,9 +20,11 @@ class control:
 
 	# Variables
 	light_val = False
+	christmas_val = False
 	app = Flask(__name__)
 	app.config.from_object(__name__)
 	
+
 	def device_monitor(self):
 	# Monitors the light switch
 	
@@ -63,7 +66,8 @@ class control:
 	# Begins the main control web page
 
 		return render_template('room_control.html', 
-				       light=control.light_val)
+				       light=control.light_val,
+				       christmas=control.christmas_val)
 	
 	
 	@app.route('/add',methods=['POST','GET'])
