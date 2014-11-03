@@ -71,16 +71,21 @@ class control:
 	
 	
 	@app.route('/add',methods=['POST','GET'])
-	def add_entry():
+	def add_entry(which_light):
 	# Change the light value
+		
 		try:
 			if not session['logged_in']:
 				return redirect(url_for('login'))
 		except:
 			return redirect(url_for('login'))
-
-		control.light_val = not control.light_val
-		GPIO.output(5, control.light_val)
+		
+		if(which_light == "light"):
+			control.light_val = not control.light_val
+			GPIO.output(5, control.light_val)
+		elif(which_light == "christmas"):
+			control.christmas_val = not control.christmas_val)
+			print christmas_val
 		return redirect(url_for('control_main'))
 
 

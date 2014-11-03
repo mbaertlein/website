@@ -1,17 +1,32 @@
 <html>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style1.css') }}">
+
 {% block body %}
+
 <h1><FONT COLOR="#A9A9A9">Room</FONT><!--
 --><FONT COLOR="#1E90FF">Control</FONT></h1>
 
-<form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+<form action="{{ url_for('add_entry', which_light = 'light') }}" method=post class=add-entry>
 <dl>
 <p class=para> </p>
 
 {% if light %}
-<dd><input type=submit id="button1" value="Turn Off" class"button">
+<dd><input type=submit id="button1" value="Turn Light Off" class"button">
 {% else %}
-<dd><input type=submit id="button1" value="Turn On" class="button">
+<dd><input type=submit id="button1" value="Turn Light On" class="button">
+{%endif%}
+
+</dl>
+</form>
+
+<form action="{{ url_for('add_entry', which_light = 'christmas') }}" method=post class=add-entry>
+<dl>
+<p class=para> </p>
+
+{% if light %}
+<dd><input type=submit id="button1" value="Turn Christmas Off" class"button">
+{% else %}
+<dd><input type=submit id="button1" value="Turn Christmas On" class="button">
 {%endif%}
 
 </dl>
