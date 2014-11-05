@@ -4,7 +4,7 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style2.css') }}" />
 
-<a href="/">
+<a href="/" onmouseover='this.style.textDecoration="none"'>
 <h1>
 <FONT COLOR="#767D7C">Mitchell</FONT><!--
 --><FONT COLOR="#000000">Baertlein</FONT>
@@ -16,7 +16,12 @@
 <a href="about">About</a><br>
 <a href="contact">Contact</a><br>
 </div>
-		  
-{% block body %}{% endblock %}
+
+{% block body %}
+<div id = "box">
+	Welcome to the personal website of Mitchell Baertlein! I am currently a sophomore at Oregon State University, and I am studying Electrical and Computer 
+	Engineering. Feel free to look around to find out more about me! Please note that this website is a work in progress.
+</div>
+{% endblock %}
 
 </html>	

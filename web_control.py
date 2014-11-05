@@ -70,7 +70,7 @@ class control:
 				       christmas=control.christmas_val)
 	
 	
-	@app.route('/add',methods=['POST','GET'])
+	@app.route('/add/<which_light>',methods=['POST','GET'])
 	def add_entry(which_light):
 	# Change the light value
 		
@@ -83,9 +83,10 @@ class control:
 		if(which_light == "light"):
 			control.light_val = not control.light_val
 			GPIO.output(5, control.light_val)
+		
 		elif(which_light == "christmas"):
-			control.christmas_val = not control.christmas_val)
-			print christmas_val
+			control.christmas_val = not control.christmas_val
+		
 		return redirect(url_for('control_main'))
 
 
