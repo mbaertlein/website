@@ -1,7 +1,8 @@
 ################################################
 # Python script that sets up a website for 
 # control over the light in Mitch Baertlein's
-# room.  Also, monitors a light switch in his
+# room, including some Christmas lights.   
+# Also, monitors a light switch in his
 # room.
 ################################################
 
@@ -47,8 +48,10 @@ class control:
 
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(5, GPIO.OUT)
+		GPIO.setup(22, GPIO.OUT)
 		GPIO.setup(6, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 		GPIO.output(5, False)
+		GPIO.output(22, False)
 
 		t = threading.Thread(target = self.start)
 		t.daemon = True
@@ -86,6 +89,9 @@ class control:
 		
 		elif(which_light == "christmas"):
 			control.christmas_val = not control.christmas_val
+			GPIO.output(22, control.christmas_val)
+		elif(which_light == "both"):
+			print "hi"
 		
 		return redirect(url_for('control_main'))
 
