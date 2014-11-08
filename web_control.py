@@ -90,8 +90,16 @@ class control:
 		elif(which_light == "christmas"):
 			control.christmas_val = not control.christmas_val
 			GPIO.output(22, control.christmas_val)
-		elif(which_light == "both"):
-			print "hi"
+		elif(which_light == "both_on"):
+			control.christmas_val = True
+			control.light_val = True
+			GPIO.output(5, True)
+			GPIO.output(22, True)
+		elif(which_light == "both_off"):
+			control.christmas_val = False
+			control.light_val = False
+			GPIO.output(5, False)
+			GPIO.output(22, False)
 		
 		return redirect(url_for('control_main'))
 

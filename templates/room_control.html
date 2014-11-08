@@ -32,15 +32,22 @@
 </dl>
 </form>
 
-<form action="{{ url_for('add_entry', which_light = 'both') }}" method=post class=add-entry>
+<form action="{{ url_for('add_entry', which_light = 'both_on') }}" method=post class=add-entry>
 <dl>
 <p class=para> </p>
 
-{% if both %}
-<dd><input type=submit id = "button1" value="Turn Both Off" class"button">
-{% else %}
 <dd><input type=submit id = "button1" value="Turn Both On" class"button">
-{%endif%}
+
+</dl>
+</form>
+
+<form action="{{ url_for('add_entry', which_light = 'both_off') }}" method=post class=add-entry>
+<dl>
+<p class=para> </p>
+
+
+<dd><input type=submit id = "button1" value="Turn Both Off" class"button">
+
 
 </dl>
 </form>
