@@ -22,6 +22,7 @@ class control:
 	# Variables
 	light_val = False
 	christmas_val = False
+	f = None
 	app = Flask(__name__)
 	app.config.from_object(__name__)
 	
@@ -39,6 +40,9 @@ class control:
 				
 				control.light_val = not control.light_val
 				GPIO.output(5, control.light_val)
+				control.f.seek(0,0)
+				control.f.write(str(int(control.light_val))+"\n"+str(int(control.christmas_val))+"\n")
+				control.f.flush()
 			
 			previous_value = current_value
 
@@ -50,9 +54,20 @@ class control:
 		GPIO.setup(5, GPIO.OUT)
 		GPIO.setup(22, GPIO.OUT)
 		GPIO.setup(6, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		GPIO.output(5, False)
-		GPIO.output(22, False)
 
+		file_name="/home/Python_Scripts/room_control/source/reboot_vals.txt"
+		control.f = open(file_name, "a+")
+		control.f.seek(0,0)
+		data = control.f.read().split()
+		control.light_val = int(data[0])
+		control.christmas_val = int(data[1])
+		GPIO.output(5, int(data[0]))
+		GPIO.output(22, int(data[1]))
+		control.f.close()
+
+		control.f = open(file_name, "w")
+		control.f.write(str(int(control.light_val))+"\n"+str(int(control.christmas_val))+"\n")
+		control.f.flush()
 		t = threading.Thread(target = self.start)
 		t.daemon = True
 		t.start()
@@ -101,6 +116,10 @@ class control:
 			GPIO.output(5, False)
 			GPIO.output(22, False)
 		
+		control.f.truncate()
+		control.f.seek(0,0)
+		control.f.write(str(int(control.light_val))+"\n"+str(int(control.christmas_val))+"\n")
+		control.f.flush()
 		return redirect(url_for('control_main'))
 
 
@@ -134,11 +153,15 @@ class control:
 		
 		return render_template('login.html', error = error)
 		
-		
+	@app.route('/projects_room_control')
+	def room_project():
+		return render_template('project_room.html')
+
+
 	@app.route('/logout')
 	def logout():
 		session.pop('logged_in', None)
-		return redirect(url_for('control_main'))
+		return redirect(url_for('home'))
 		
 		
 	def start(self):

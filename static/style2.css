@@ -67,7 +67,7 @@ a:active {
 	position:absolute;
 	top:55px;
 	left:600px;
-	width:100px;
+	width:400px;
 	border-radius:10px;
 	text-align:left;
 	font-family:Trebuchet MS;
@@ -100,6 +100,17 @@ a:active {
 	padding:10px;
 	border-radius:10px;
 }
+#section2 {
+	background-color:#E6E6E6;
+	position:absolute;
+	top:240px;
+	left:700px;
+	width:300px;
+	text-align:left;
+	font-family:Trebuchet MS;
+	padding:10px;
+	border-radius:10px;
+}
 #sectionHead {
 	background-color:#1E1F61;
 	top:185px;
@@ -107,6 +118,21 @@ a:active {
 	position:absolute;
 	width:300px;
 	left:200px;
+	text-align:center;
+	font-family:Trebuchet MS;
+	font-style:bold;
+	font-size:20px;
+	padding:10px;
+	color:white;
+}
+
+#sectionHead2 {
+	background-color:#1E1F61;
+	top:185px;
+	position:absolute;
+	border-radius:10px;
+	width:300px;
+	left:700px;
 	text-align:center;
 	font-family:Trebuchet MS;
 	font-style:bold;
