@@ -7,7 +7,7 @@
 ################################################
 
 #Tell the program if we are in debugging mode
-debug_mode = True;
+debug_mode = False
 
 from flask import Flask, request, render_template, g, url_for, redirect, session
 
