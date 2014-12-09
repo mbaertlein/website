@@ -6,8 +6,14 @@
 # room.
 ################################################
 
+#Tell the program if we are in debugging mode
+debug_mode = True;
+
 from flask import Flask, request, render_template, g, url_for, redirect, session
-import RPi.GPIO as GPIO
+
+if not debug_mode:
+	import RPi.GPIO as GPIO
+
 import threading
 import config
 
@@ -25,6 +31,9 @@ class control:
 	f = None
 	app = Flask(__name__)
 	app.config.from_object(__name__)
+	
+	global debug_mode
+	d_mode = debug_mode
 	
 
 	def device_monitor(self):
@@ -49,28 +58,31 @@ class control:
 			
 	def init(self):
 	# Initializes the GPIO pins.
+		if not self.d_mode:
+			GPIO.setmode(GPIO.BCM)
+			GPIO.setup(5, GPIO.OUT)
+			GPIO.setup(22, GPIO.OUT)
+			GPIO.setup(6, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
-		GPIO.setmode(GPIO.BCM)
-		GPIO.setup(5, GPIO.OUT)
-		GPIO.setup(22, GPIO.OUT)
-		GPIO.setup(6, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+			file_name="/home/Python_Scripts/room_control/source/reboot_vals.txt"
+			control.f = open(file_name, "a+")
+			control.f.seek(0,0)
+			data = control.f.read().split()
+			control.light_val = int(data[0])
+			control.christmas_val = int(data[1])
+			GPIO.output(5, int(data[0]))
+			GPIO.output(22, int(data[1]))
+			control.f.close()
 
-		file_name="/home/Python_Scripts/room_control/source/reboot_vals.txt"
-		control.f = open(file_name, "a+")
-		control.f.seek(0,0)
-		data = control.f.read().split()
-		control.light_val = int(data[0])
-		control.christmas_val = int(data[1])
-		GPIO.output(5, int(data[0]))
-		GPIO.output(22, int(data[1]))
-		control.f.close()
-
-		control.f = open(file_name, "w")
-		control.f.write(str(int(control.light_val))+"\n"+str(int(control.christmas_val))+"\n")
-		control.f.flush()
-		t = threading.Thread(target = self.start)
-		t.daemon = True
-		t.start()
+			control.f = open(file_name, "w")
+			control.f.write(str(int(control.light_val))+"\n"+str(int(control.christmas_val))+"\n")
+			control.f.flush()
+			t = threading.Thread(target = self.start)
+			t.daemon = True
+			t.start()
+			
+		else:
+			self.start()
 
 	
 	@app.route('/')
@@ -166,11 +178,14 @@ class control:
 		
 	def start(self):
 	# Beginning the web application	
+		if not self.d_mode:
+			control.app.run('0.0.0.0', 80)
+		else:
+			control.app.run()
 		
-		control.app.run('0.0.0.0', 80)
-
 if __name__ == "__main__":
 	application = control()
 	application.init()
-	application.device_monitor()
+	if not debug_mode:
+		application.device_monitor()
 
