@@ -7,7 +7,7 @@
 ################################################
 
 #Tell the program if we are in debugging mode
-debug_mode = False
+debug_mode = True
 
 from flask import Flask, request, render_template, g, url_for, redirect, session
 
@@ -168,6 +168,10 @@ class control:
 	@app.route('/projects_room_control')
 	def room_project():
 		return render_template('project_room.html')
+		
+	@app.route('/projects_garage')
+	def garage_project():
+		return render_template('project_garage.html')
 
 
 	@app.route('/logout')
