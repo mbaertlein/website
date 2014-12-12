@@ -1,7 +1,7 @@
 # ##################################################
 # This program will begin a website that
 # will work as my personal website, and 
-# a way to control the lights in my room.
+# a way to website the lights in my room.
 # It will work in concert with a teensy,
 # so that if the Pi must reboot, or I 
 # need to do work on the site, the lights
@@ -22,7 +22,7 @@ import time
 # This is a user created file; it stores passwords and usernames.
 import config
 
-# Read in our room control username and password from config.py
+# Read in our room website username and password from config.py
 USERNAME = config.USERNAME
 PASSWORD = config.PASSWORD
 SECRET_KEY = config.SECRET_KEY
@@ -81,7 +81,7 @@ class website:
 	def start(self):
 	# Begin the web application.
 		
-		control.app.run('0.0.0.0', 80)
+		website.app.run('0.0.0.0', 80)
 		
 	
 	def monitor(self):
@@ -95,8 +95,8 @@ class website:
 				
 	def update():
 		
-		GPIO.output(self.lightOut, control.lightVal)
-		GPIO.output(self.christmasOut, control.christmasVal)
+		GPIO.output(self.lightOut, website.lightVal)
+		GPIO.output(self.christmasOut, website.christmasVal)
 		GPIO.output(self.latch, True)
 		time.sleep(1)
 		GPIO.output(self.latch, False)
@@ -128,7 +128,7 @@ class website:
 		return render_template('project.html')
 		
 	# Page describing this project.
-	@app.route('/projects_room_control')
+	@app.route('/projects_room_website')
 	def room_project():
 		return render_template('project_room.html')
 		
@@ -148,13 +148,13 @@ class website:
 		
 		error = None
 		if request.method == 'POST':
-			if request.form['username'] != control.app.config['USERNAME']:
+			if request.form['username'] != website.app.config['USERNAME']:
 				error = 'Invalid Username'
-			elif request.form['password'] != control.app.config['PASSWORD']:
+			elif request.form['password'] != website.app.config['PASSWORD']:
 				error = 'Invalid Password'
 			else:
 				session['logged_in'] = True
-				return redirect(url_for('control_main'))
+				return redirect(url_for('website_main'))
 		
 		return render_template('login.html', error = error)
 
@@ -167,22 +167,22 @@ class website:
 		
 		
 	# ############################################################################### #
-	#                                 Room Control                                    #
+	#                                 Room website                                    #
 	# ############################################################################### #
 	
 	
-	@app.route('/control')
-	def control_main():
-	# Begins the main control web page
+	@app.route('/website')
+	def website_main():
+	# Begins the main website web page
 	
 		# Check our light values.
-		control.lightVal = not GPIO.input(control.lightIn)
-		control.christmasVal = not GPIO.input(control.christmasIn)
+		website.lightVal = not GPIO.input(website.lightIn)
+		website.christmasVal = not GPIO.input(website.christmasIn)
 		
 		# Render the template.
-		return render_template('room_control.html', 
-				       light=control.lightVal,
-				       christmas=control.christmasVal)
+		return render_template('room_website.html', 
+				       light=website.lightVal,
+				       christmas=website.christmasVal)
 	
 	
 	@app.route('/add/<which_light>',methods=['POST','GET'])
@@ -199,33 +199,33 @@ class website:
 		# Hey! We were logged in! Now lets change those values.
 		
 		# Make sure we have the right light values:
-		control.lightVal = not GPIO.input(control.lightIn)
-		control.christmasVal = not GPIO.input(control.christmasIn)
+		website.lightVal = not GPIO.input(website.lightIn)
+		website.christmasVal = not GPIO.input(website.christmasIn)
 		
 		# Check what we want to do.
 		if(which_light == "light"):	
-			control.lightVal = not control.lightVal
+			website.lightVal = not website.lightVal
 		
 		elif(which_light == "christmas"):
-			control.christmasVal = not control.christmasVal
+			website.christmasVal = not website.christmasVal
 		
 		elif(which_light == "both_on"):
-			control.christmasVal = True
-			control.lightVal = True
+			website.christmasVal = True
+			website.lightVal = True
 
 		elif(which_light == "both_off"):
-			control.christmasVal = False
-			control.lightVal = False
+			website.christmasVal = False
+			website.lightVal = False
 
-		t = threading.Thread(target = control.update)
+		t = threading.Thread(target = website.update)
 		t.daemon = True
 		t.start()
 		
-		return redirect(url_for('control_main'))		
+		return redirect(url_for('website_main'))		
 
 			
 		
-if(__name__ = "__main___"):
+if(__name__ = "__main__"):
 	
 	web = website()
 	web.init()
