@@ -232,6 +232,7 @@ if(__name__ == "__main__"):
 	web.init()
 	
 	while(1):
+<<<<<<< HEAD
 		web.monitor()
 	
 	
@@ -240,3 +241,8 @@ if(__name__ == "__main__"):
 	
 	
 	
+=======
+	# Allow the application to continue on indefinitely.
+		
+		web.monitor()
+>>>>>>> adca15454a197bd195f5f032bc3413dc0d0b6ee0
