@@ -231,11 +231,6 @@ if(__name__ = "__main__"):
 	web.init()
 	
 	while(1):
+	# Allow the application to continue on indefinitely.
+		
 		web.monitor()
-	
-	
-	
-	
-	
-	
-	
