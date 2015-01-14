@@ -36,8 +36,8 @@ class website:
 	
 	# Outputs:
 	latch = 5             # Lets the teensy know we are sending values.
-	christmasOut = 22     # Tells the teensy if we want the christmas lights on or off.
-	lightOut = 6          # Tells the teensy if we want the light on or off.
+	christmasOut = 17     # Tells the teensy if we want the christmas lights on or off.
+	lightOut = 22         # Tells the teensy if we want the light on or off.
 	
 	# Inputs:
 	lightIn = 9
@@ -65,12 +65,12 @@ class website:
 		
 		# Setup the Inputs. They are pull ups, so when the lights are on, 
 		# the inputs are low.
-		GPIO.setup(self.lightIn, GPIO.IN, pull_up_down = GPIO.PUD_UP)
-		GPIO.setup(self.christmasIn, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+		GPIO.setup(self.lightIn, GPIO.IN)
+		GPIO.setup(self.christmasIn, GPIO.IN)
 		
 		# Check the inputs (are the lights on or off?)
-		self.lightVal = not GPIO.input(self.lightIn)
-		self.christmasVal = not GPIO.input(self.christmasIn)
+		self.lightVal =  GPIO.input(self.lightIn)
+		self.christmasVal =  GPIO.input(self.christmasIn)
 		
 		# This starts up the website.
 		self.web_thread = threading.Thread(target = self.start)
@@ -91,16 +91,8 @@ class website:
 			if(self.web_thread.is_alive() == False):
 				self.web_thread = threading.Thread(target = self.start)
 				self.web_thread.daemon = True
-				self.web_thread.start()
-				
-	def update():
-		
-		GPIO.output(self.lightOut, website.lightVal)
-		GPIO.output(self.christmasOut, website.christmasVal)
-		GPIO.output(self.latch, True)
-		time.sleep(1)
-		GPIO.output(self.latch, False)
-	
+                                self.web_thread.start()
+
 	
 	# ############################################################################# #
 	#                       Functions for personal website.                         #
@@ -128,7 +120,7 @@ class website:
 		return render_template('project.html')
 		
 	# Page describing this project.
-	@app.route('/projects_room_website')
+	@app.route('/projects_room_control')
 	def room_project():
 		return render_template('project_room.html')
 		
@@ -154,7 +146,8 @@ class website:
 				error = 'Invalid Password'
 			else:
 				session['logged_in'] = True
-				return redirect(url_for('website_main'))
+				return redirect(url_for('control_main'))
+
 		
 		return render_template('login.html', error = error)
 
@@ -171,16 +164,16 @@ class website:
 	# ############################################################################### #
 	
 	
-	@app.route('/website')
-	def website_main():
+	@app.route('/control')
+	def control_main():
 	# Begins the main website web page
 	
 		# Check our light values.
-		website.lightVal = not GPIO.input(website.lightIn)
-		website.christmasVal = not GPIO.input(website.christmasIn)
+		website.lightVal =  GPIO.input(website.lightIn)
+		website.christmasVal =  GPIO.input(website.christmasIn)
 		
 		# Render the template.
-		return render_template('room_website.html', 
+		return render_template('room_control.html', 
 				       light=website.lightVal,
 				       christmas=website.christmasVal)
 	
@@ -199,33 +192,41 @@ class website:
 		# Hey! We were logged in! Now lets change those values.
 		
 		# Make sure we have the right light values:
-		website.lightVal = not GPIO.input(website.lightIn)
-		website.christmasVal = not GPIO.input(website.christmasIn)
-		
+		website.lightVal =  GPIO.input(website.lightIn)
+		website.christmasVal =  GPIO.input(website.christmasIn)
+	
 		# Check what we want to do.
 		if(which_light == "light"):	
 			website.lightVal = not website.lightVal
+			GPIO.output(website.lightOut, website.lightVal)
+			GPIO.output(website.christmasOut, website.christmasVal)
 		
 		elif(which_light == "christmas"):
 			website.christmasVal = not website.christmasVal
+			GPIO.output(website.christmasOut, website.christmasVal)
+			GPIO.output(website.lightOut, website.lightVal)
 		
 		elif(which_light == "both_on"):
 			website.christmasVal = True
 			website.lightVal = True
+			GPIO.output(website.lightOut, True)
+			GPIO.output(website.christmasOut, True)
 
 		elif(which_light == "both_off"):
 			website.christmasVal = False
 			website.lightVal = False
-
-		t = threading.Thread(target = website.update)
-		t.daemon = True
-		t.start()
+			GPIO.output(website.lightOut, False)
+			GPIO.output(website.christmasOut, False)
 		
-		return redirect(url_for('website_main'))		
+		GPIO.output(website.latch, True)
+		time.sleep(1)
+		GPIO.output(website.latch, False)
+
+		return redirect(url_for('control_main'))		
 
 			
 		
-if(__name__ = "__main__"):
+if(__name__ == "__main__"):
 	
 	web = website()
 	web.init()
