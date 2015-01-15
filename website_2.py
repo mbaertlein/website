@@ -35,9 +35,9 @@ class website:
 	christmasVal = False
 	
 	# Outputs:
-	latch = 5             # Lets the teensy know we are sending values.
-	christmasOut = 17     # Tells the teensy if we want the christmas lights on or off.
-	lightOut = 22         # Tells the teensy if we want the light on or off.
+	latch = 17             # Lets the teensy know we are sending values. #I JUST SWITCHED LATCH AND CHRISTMAS!!!!
+	christmasOut = 22     # Tells the teensy if we want the christmas lights on or off.
+	lightOut = 5         # Tells the teensy if we want the light on or off.
 	
 	# Inputs:
 	lightIn = 9
@@ -169,7 +169,7 @@ class website:
 	# Begins the main website web page
 	
 		# Check our light values.
-		website.lightVal =  GPIO.input(website.lightIn)
+		website.lightVal = not GPIO.input(website.lightIn)
 		website.christmasVal =  GPIO.input(website.christmasIn)
 		
 		# Render the template.
@@ -192,7 +192,7 @@ class website:
 		# Hey! We were logged in! Now lets change those values.
 		
 		# Make sure we have the right light values:
-		website.lightVal =  GPIO.input(website.lightIn)
+		website.lightVal =   GPIO.input(website.lightIn)
 		website.christmasVal =  GPIO.input(website.christmasIn)
 	
 		# Check what we want to do.
