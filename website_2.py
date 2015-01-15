@@ -230,19 +230,10 @@ if(__name__ == "__main__"):
 	
 	web = website()
 	web.init()
+	x = 0
 	
 	while(1):
-<<<<<<< HEAD
-		web.monitor()
-	
-	
-	
-	
-	
-	
-	
-=======
-	# Allow the application to continue on indefinitely.
-		
-		web.monitor()
->>>>>>> adca15454a197bd195f5f032bc3413dc0d0b6ee0
+		try:
+			web.monitor()
+		except:
+			x = 0
