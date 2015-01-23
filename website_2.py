@@ -108,6 +108,14 @@ class website:
 	@app.route('/contact',methods=['POST', 'GET'])  
 	def contact():
 		return render_template('contact.html')
+	
+	@app.route('/new_home')
+	def new_home():
+		return render_template('layout2.html')
+	
+	@app.route('/selfie.jpg')
+	def selfie():
+		return url_for('selfie.jpg')
 
 	# About page.
 	@app.route('/about')
@@ -208,14 +216,14 @@ class website:
 		
 		elif(which_light == "both_on"):
 			website.christmasVal = True
-			website.lightVal = True
-			GPIO.output(website.lightOut, True)
+			website.lightVal = False
+			GPIO.output(website.lightOut, False)
 			GPIO.output(website.christmasOut, True)
 
 		elif(which_light == "both_off"):
 			website.christmasVal = False
-			website.lightVal = False
-			GPIO.output(website.lightOut, False)
+			website.lightVal = True
+			GPIO.output(website.lightOut, True)
 			GPIO.output(website.christmasOut, False)
 		
 		GPIO.output(website.latch, True)
