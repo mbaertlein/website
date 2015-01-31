@@ -22,6 +22,9 @@ import time
 # This is a user created file; it stores passwords and usernames.
 import config
 
+from flask.ext.mail import Message, Mail
+from forms import ContactForm
+
 # Read in our room website username and password from config.py
 USERNAME = config.USERNAME
 PASSWORD = config.PASSWORD
@@ -44,9 +47,17 @@ class website:
 	christmasIn = 10
 	
 	# For use with the web app
+	mail = Mail()
 	app = Flask(__name__)
 	app.config.from_object(__name__)
 	
+	app.config["MAIL_SERVER"]="smtp.gmail.com"
+	app.config["MAIL_PORT"]=465
+	app.config["MAIL_USE_SSL"]=True
+	app.config["MAIL_USERNAME"]="mitch.h.baertlein@gmail.com"
+	app.config["MAIL_PASSWORD"]="piman123"
+
+	mail.init_app(app)
 	# Threads.
 	web_thread = None
 	teensy_comm_thread = None
@@ -105,9 +116,26 @@ class website:
 		return render_template('home_screen.html')
 		
 	# Contact page.
-	@app.route('/contact',methods=['POST', 'GET'])  
+	@app.route('/contact', methods=['GET', 'POST'])  
 	def contact():
-		return render_template('contact.html')
+	
+		form = ContactForm()
+	        
+		if request.method=='POST':
+			
+			if form.validate() == False:
+				return render_template('contact.html', form=form)
+			else:
+				msg=Message(form.subject.data, sender='mitch.h.baertlein@gmail.com', recipients=["mitch.h.baertlein@gmail.com"])
+				msg.body="""
+				From: %s <%s>
+				%s
+				""" % (form.name.data, form.email.data, form.message.data)
+				website.mail.send(msg)
+				return render_template('msg_sent.html')
+		elif request.method=='GET':
+		
+			return render_template('contact.html', form=form)
 	
 	@app.route('/new_home')
 	def new_home():
@@ -126,7 +154,11 @@ class website:
 	@app.route('/projects')
 	def projects():
 		return render_template('project.html')
-		
+	
+	@app.route('/resume')
+	def mailto():
+		return render_template('resume.html')
+
 	# Page describing this project.
 	@app.route('/projects_room_control')
 	def room_project():

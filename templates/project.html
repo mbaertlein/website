@@ -1,28 +1,76 @@
-{% extends "layout.html" %}
+<!doctype html>
 
-{% block body %}
-<div id = "pageTitle">
-Projects
-</div>
+<html>
 
-<a href = "/projects_room_control">
-<div id = "sectionHead">
-Web Controlled Lights
-</div>
+<head>
+  <link rel="stylesheet" href="../static/style3.css">
+</head>
+<HR COLOR="#47B28F" WIDTH="100%" SIZE="7">
+
+
+	<svg height="1000" width="100%">
+
+	<defs>
+        <clipPath id="myClippingPath">
+        	
+            	<circle cx="20%" cy="470" r="80" fill="008A8A">
+        	
+        </clipPath>
+
+        <clipPath id="myClippingPath2">
+            <circle cx="50%" cy="470" r="80" fill="008A8A">
+        </clipPath>
+
+        <clipPath id="myClippingPath3">
+        	<circle cx="45%" cy="200" r="80">
+        </clipPath>
+
+    </defs>
+    	<a xlink:href="/">
+  	<circle cx="15%" cy="82" r="70" stroke="black" stroke-width="3" fill="black" />
+
+  	<text fill="#ffffff" font-size="20" font-family="Georgia" x="11%" y="95">Mitchell</text>
+
+
+  	<text fill="#ffffff" font-size="20" font-family="Georgia" x="11%" y="125">Baertlein</text>
+	</a>
+
+  	<rect x="30%" y="175" width="70%" height="250" fill="#47B28F" />
+  	<rect x="0" y="600" width="70%" height="250" fill="#47B28F" />	
+	
+	<text fill="black" font-size="18" font-family="Verdana" x="53%" y="160">Hand-Held Snake Game</text>
+	<image x="35%" y="70" width="320" height="280" xlink:href="{{url_for('static',filename="proj.jpg")}}" clip-path="url(#myClippingPath3)" />
+
+	<a xlink:href="/">
+	<text fill="black" font-size="15" font-family="Verdana" x="40%" y="40">Home</text>
+	</a>
+	
+	  <a xlink:href="resume">
+	<text fill="black" font-size="15" font-family="Verdana" x="48%" y="40">Resum&eacute</text>
+</a>
+	
+	<a xlink:href="about">
+	<text fill="black" font-size="15" font-family="Verdana" x="57%" y="40">About</text>
+	</a>
+
+	<a xlink:href="projects">
+	<text fill="#47B28F" font-size="15" font-family="Verdana" x="65%" y="40">Projects</text>
+</a>
+	<a xlink:href="contact">
+	<text fill="black" font-size="15" font-family="Verdana" x="74%" y="40">Contact</text>
 </a>
 
-<div id ="section">
-This project used a Raspberry Pi to turn on and off the lights in my room from a website.
-</div>
+<text fill="black" font-size="13" font-family="Georgia" x = "55%" y="220">Our final project in one of my classes at OSU was to make something using one </text>
 
-<a href = "/projects_garage">
-<div id ="sectionHead2">
-Wifi Garage Door 
-</div>
-</a>
+<text fill="black" font-size="13" font-family="Georgia" x="54%" y="240"> of the main items we used in the class's lab. Our options basically boiled down to a PJRC and 	</text>
 
-<div id = "section2">
-This project used a Raspberry Pi to open and close a garage door from an Android Widget.
-</div>
+<text fill="black" font-size="13" font-family="Georgia" x="53%" y="260"> a basic microcontroller. I chose the microcontroller (a Teensy to be exact) because it allowed for </text>
 
-{% endblock %}
+<text fill="black" font-size="13" font-family="Georgia" x="52.5%" y="280"> a wider array of things that could be made in the amount of time we had. I had a large amount of LED's, </text>
+
+
+	</svg>
+
+
+</html>
+

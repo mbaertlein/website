@@ -1,30 +1,98 @@
 <!doctype html>
 
 <html>
-<title> Mitchell Baertlein </title>
 
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style2.css') }}" />
+	<title>Mitchell Baertlein</title>
 
-<h1>
-<a href="/" onmouseover='this.style.textDecoration="none"'>
-<FONT COLOR="#767D7C">Mitchell</FONT><!--
---><FONT COLOR="#000000">Baertlein</FONT>
-</a>
-</h1>
-
-<div id = "nav">
-<a href="projects">Projects</a><br>
-<a href="about">About</a><br>
-<a href="contact">Contact</a><br>
-</div>
-
-{% block body %}
-<div id = "box">
-	Welcome to the personal website of Mitchell Baertlein! I am currently a sophomore at Oregon State University, and I am studying Electrical and Computer 
-	Engineering. Feel free to look around to find out more about me! Please note that this website is a work in progress.
-</div>
-{% endblock %}
+	<head>
+		<link rel="shortcut icon" href="{{url_for('static',filename="favicon.ico")}}"/>
+  		<link rel="stylesheet" href="../static/style3.css">
+	</head>
 
 
-</html>	
+
+	<svg height="200" width="1300">
+
+		<defs>
+        		<clipPath id="myClippingPath">
+            			<circle cx="20%" cy="470" r="8%" fill="008A8A">
+        		</clipPath>
+
+        		<clipPath id="myClippingPath2">
+            			<circle cx="50%" cy="470" r="8%" fill="008A8A">
+        		</clipPath>
+
+        		<clipPath id="myClippingPath3">
+        			<circle cx="80%" cy="470" r="8%">
+        		</clipPath>
+
+    		</defs>
+
+    
+    		<a xlink:href="/">
+			<circle cx="15%" cy="122" r="7%" stroke="black" stroke-width="3" fill="black" />
+			<text fill="#ffffff" font-size="large" font-family="Georgia" x="11%" y="135">Mitchell</text>
+			<text fill="#ffffff" font-size="large" font-family="Georgia" x="11%" y="155">Baertlein</text>
+		</a>
+
+		<a xlink:href="/">
+			<text fill="#47B28F" font-size="15" font-family="Verdana" x="40%" y="40">Home</text>
+		</a>
+	
+		<a xlink:href="resume">
+			<text fill="black" font-size="15" font-family="Verdana" x="48%" y="40">Resum&eacute</text>
+		</a>
+	
+		<a xlink:href="about">
+			<text fill="black" font-size="15" font-family="Verdana" x="57%" y="40">About</text>
+		</a>
+
+		<a xlink:href="projects">
+			<text fill="black" font-size="15" font-family="Verdana" x="65%" y="40">Projects</text>
+		</a>
+		
+		<a xlink:href="contact">
+			<text fill="black" font-size="15" font-family="Verdana" x="74%" y="40">Contact</text>
+		</a>	
+
+		</svg>	
+		
+		{% block body %}
+
+		<svg width="1350" height="400">
+			<rect x="0" y="150" width="100%" height="250" fill="#47B28F" />
+  	
+			<a xlink:href="resume">
+				<image x="10%" y="130" width="20%" height="280" xlink:href="{{url_for('static',filename="Resume2.jpg")}}" clip-path="url(#myClippingPath)" />
+  			</a>
+
+			<a xlink:href="contact">
+				<image x="38%" y="330" width="24%" height="300" xlink:href="{{url_for('static',filename="selfie.jpg")}}" clip-path="url(#myClippingPath2)" />
+			</a>
+
+			<a xlink:href="projects">
+				<image x="69%" y="330" width="320" height="280" xlink:href="{{url_for('static',filename="proj.jpg")}}" clip-path="url(#myClippingPath3)" />
+			</a>
+
+        		<a xlink:href="resume">	
+				<text fill="black" font-size="18" font-family="Verdana" x="17%" y="580">Resum&eacute</text>
+			</a>
+
+	
+			<a xlink:href="contact">
+				<text fill="black" font-size="18" font-family="Verdana" x="47.5%" y="580">Contact</text>
+			</a>
+	
+			<a xlink:href="projects">
+				<text fill="black" font-size="18" font-family="Verdana" x="77%" y="580">Projects</text>
+			</a>
+
+			<text fill="black" font-size="30" font-family="Impact" x="19%" y="30">Yesterday is not ours to recover, </text>
+			<text fill="black" font-size="30" font-family="Impact" x="19%" y="70">but tomorrow is ours to win or lose.</text>
+			<text fill="black" font-size="25" font-family="Impact" x="30%" y="100">-Lyndon B. Johnson</text>
+		</svg>
+	
+		{% endblock %}
+
+</html>
+
