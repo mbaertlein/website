@@ -1,76 +1,99 @@
-<!doctype html>
-
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="../static/style3.css">
+	<title>Mitchell Baertlein</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-<HR COLOR="#47B28F" WIDTH="100%" SIZE="7">
+
+<style>
+
+body { 
+	background-color:#A4A4A4;
+}
+
+h1{
+  font-size:35px;
+  font-family:impact;
+}
+#p2 {
+	color:black;
+	font-size:25px;
+	font-family:Impact;
+}
+#p3 {
+	color:black;
+	font-size:30px;
+	font-family:Georgia;
+}
+
+</style>
 
 
-	<svg height="1000" width="100%">
+<body>
 
-	<defs>
-        <clipPath id="myClippingPath">
-        	
-            	<circle cx="20%" cy="470" r="80" fill="008A8A">
-        	
-        </clipPath>
+<nav class="navbar navbar-inverse" style="background-color:#0B4C5F; border-color:#0B4C5F;">
+	<div class="container-fluid">
+    	<div class="navbar-header">
+      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="border-color:white;">
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span> 
+      		</button>
+   			<a class="navbar-brand" href="/" style="color:white;">Mitchell Baertlein</a>
+    	</div>
+    	
+    	<div class="collapse navbar-collapse" id="myNavbar">
+      		<ul class="nav navbar-nav">
+        		<li><a href="/">Home</a></li>
+       			<li style="background-color:#0B2F3A;"><a href="/projects">Projects</a></li>
+        		<li><a href="/about">About</a></li> 
+        		<li><a href="/contact">Contact</a></li> 
+        		<li><a href="/resume">Resum&eacute</a></li>
+      		</ul>
+    	</div>
+  	</div>
+</nav>
 
-        <clipPath id="myClippingPath2">
-            <circle cx="50%" cy="470" r="80" fill="008A8A">
-        </clipPath>
-
-        <clipPath id="myClippingPath3">
-        	<circle cx="45%" cy="200" r="80">
-        </clipPath>
-
-    </defs>
-    	<a xlink:href="/">
-  	<circle cx="15%" cy="82" r="70" stroke="black" stroke-width="3" fill="black" />
-
-  	<text fill="#ffffff" font-size="20" font-family="Georgia" x="11%" y="95">Mitchell</text>
+<br>
+<br>
+<br>
 
 
-  	<text fill="#ffffff" font-size="20" font-family="Georgia" x="11%" y="125">Baertlein</text>
-	</a>
-
-  	<rect x="30%" y="175" width="70%" height="250" fill="#47B28F" />
-  	<rect x="0" y="600" width="70%" height="250" fill="#47B28F" />	
+<div class="row centered" align=center style="background-color:#0B4C5F; padding:10px; width:90%; box-shadow: 10px 10px 5px #888888;">
 	
-	<text fill="black" font-size="18" font-family="Verdana" x="53%" y="160">Hand-Held Snake Game</text>
-	<image x="35%" y="70" width="320" height="280" xlink:href="{{url_for('static',filename="proj.jpg")}}" clip-path="url(#myClippingPath3)" />
+	<div class="col-xs-1">
+  </div>
 
-	<a xlink:href="/">
-	<text fill="black" font-size="15" font-family="Verdana" x="40%" y="40">Home</text>
-	</a>
-	
-	  <a xlink:href="resume">
-	<text fill="black" font-size="15" font-family="Verdana" x="48%" y="40">Resum&eacute</text>
-</a>
-	
-	<a xlink:href="about">
-	<text fill="black" font-size="15" font-family="Verdana" x="57%" y="40">About</text>
-	</a>
+  <div class="col-xs-3">
+    <a href="/projects" style="color:black;">
+      <img width="250" height="250" class="img-circle img-responsive" src="{{url_for('static',filename="proj.jpg")}}" alt="Contact me">
+    </a>
+  </div>
 
-	<a xlink:href="projects">
-	<text fill="#47B28F" font-size="15" font-family="Verdana" x="65%" y="40">Projects</text>
-</a>
-	<a xlink:href="contact">
-	<text fill="black" font-size="15" font-family="Verdana" x="74%" y="40">Contact</text>
-</a>
+  <div class="col-xs-8" style="color:white;">
+    <h1>Hand-Held Snake Game</h1>
+  </div>
+</div>
 
-<text fill="black" font-size="13" font-family="Georgia" x = "55%" y="220">Our final project in one of my classes at OSU was to make something using one </text>
+<br>
+<br>
 
-<text fill="black" font-size="13" font-family="Georgia" x="54%" y="240"> of the main items we used in the class's lab. Our options basically boiled down to a PJRC and 	</text>
+<div class="row" align=center style="width:100%;">
 
-<text fill="black" font-size="13" font-family="Georgia" x="53%" y="260"> a basic microcontroller. I chose the microcontroller (a Teensy to be exact) because it allowed for </text>
+  <div class = "col-xs-2"></div>
 
-<text fill="black" font-size="13" font-family="Georgia" x="52.5%" y="280"> a wider array of things that could be made in the amount of time we had. I had a large amount of LED's, </text>
+  <div class = "col-xs-10">
+    <div class="row" align=center style="background-color:#0B6138; padding:10px; box-shadow: 0px 10px 10px 5px #888888;">
+      <div class = "col-xs-12">
 
+        Hello there
+      </div>
+    </div>
+  </div>
+</div>
 
-	</svg>
-
-
-</html>
-
+</html>	
